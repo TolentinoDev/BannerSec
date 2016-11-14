@@ -1,0 +1,249 @@
+{{extend 'layout.html'}}
+
+{{block center}}
+    <div class="container">
+        <h1 class="page-header">Banner Account Request Form</h1>
+        <p>Submitting this form indicates that you have reviewed and understand the Fayetteville State University Policy on Information Security and agree to adhere to all policies and statements within.</p>
+        <form class="form-horizontal" action="{{=URL('default', 'processinit')}}" method="POST">
+            <div class="form-group">
+                <label class="control-label col-md-2">Type of Request</label>
+                <div class="col-md-4">
+                    <select name="requesttype" class="form-control">
+                        <option value="New">New Account</option>
+                        <option value="Update">Update Account</option>
+                        <option value="Delete">Delete Account</option>
+                        <option value="Unlock">Unlock Account</option>
+                        <option value="Lock">Lock Account</option>
+                    </select>
+                </div>
+            </div>
+            <blockquote><h2>User Information</h2></blockquote>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">First Name</label>
+                        <div class="col-md-9">
+                            <input type="text" name="first" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">MI</label>
+                        <div class="col-md-9">
+                            <input type="text" name="middle" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Last Name</label>
+                        <div class="col-md-9">
+                            <input type="text" name="last" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-1">Department</label>
+                <div class="col-md-11">
+                    <select name="department" class="form-control">
+                        {{for dept in depts:}}
+                            <option value="{{=dept[0]}}">{{=dept[0]}}</option>
+                        {{pass}}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Banner ID</label>
+                        <div class="col-md-8">
+                            <input type="text" name="banner" class="form-control" required placeholder="83#######">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Office Phone</label>
+                        <div class="col-md-8">
+                            <input type="text" name="officephone" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Banner Username</label>
+                        <div class="col-md-8">
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Effective Date</label>
+                        <div class="col-md-8">
+                            <input type="date" name="effectivedate" class="form-control" required placeholder="mm/dd/yyyy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <blockquote><h2>Manager Information</h2></blockquote>
+            <p class="lead"><strong>Do not enter yourself as manager. Please enter your supervisor.</strong></p>
+            <div class="form-group">
+                <label class="control-label col-md-2">Manager's Username</label>
+                <div class="input-group col-md-4">
+                    <input name="manager" type="text" class="form-control" aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2">@uncfsu.edu</span>
+                </div>
+            </div>
+            <blockquote><h2>Select Banner Access</h2></blockquote>
+            <div id="admclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">Admissions</span></div>
+            <div id="admclass" style="margin-bottom:30px;display:none;">
+                {{for admrow in adm:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="admission" type="checkbox" value="{{=admrow.secclass}}">
+                            {{=admrow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div id="almclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">Alumni / Advancement</span></div>
+            <div id="almclass" style="margin-bottom:30px;display:none;">
+                {{for almrow in alm:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="alumni" type="checkbox" value="{{=almrow.secclass}}">
+                            {{=almrow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div id="fcclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">Finance Campus Users</span></div>
+            <div id="fcclass" style="margin-bottom:30px;display:none;">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Fund/Orgn Code</label>
+                        <div class="col-md-9">
+                            <input type="text" name="fundcode" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+                {{for fcrow in fc:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="financecampus" type="checkbox" value="{{=fcrow.secclass}}">
+                            {{=fcrow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div id="fbclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">Finance for Business Office</span></div>
+            <div id="fbclass" style="margin-bottom:30px;display:none;">
+                {{for fbrow in fb:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="financebusiness" type="checkbox" value="{{=fbrow.secclass}}">
+                            {{=fbrow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div id="faclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">Financial Aid</span></div>
+            <div id="faclass" style="margin-bottom:30px;display:none;">
+                {{for farow in fa:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="finaid" type="checkbox" value="{{=farow.secclass}}">
+                            {{=farow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div id="hrclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">Human Resources / Payroll</span></div>
+            <div id="hrclass" style="margin-bottom:30px;display:none;">
+                {{for hrrow in hr:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="humanresources" type="checkbox" value="{{=hrrow.secclass}}">
+                            {{=hrrow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div id="itclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">ITTS</span></div>
+            <div id="itclass" style="margin-bottom:30px;display:none;">
+                {{for itrow in it:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="itts" type="checkbox" value="{{=itrow.secclass}}">
+                            {{=itrow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div id="regclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">Registrar</span></div>
+            <div id="regclass" style="margin-bottom:30px;display:none;">
+                {{for regrow in reg:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="registrar" type="checkbox" value="{{=regrow.secclass}}">
+                            {{=regrow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div id="saclick" class="alert alert-success" role="alert" style="cursor:pointer;"><span style="color:#000;">Student Affairs</span></div>
+            <div id="saclass" style="margin-bottom:30px;display:none;">
+                {{for sarow in sa:}}
+                    <div class="checkbox">
+                        <label>
+                            <input name="studentaffairs" type="checkbox" value="{{=sarow.secclass}}">
+                            {{=sarow.secclass}}
+                        </label>
+                    </div>
+                {{pass}}
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <input class="btn btn-lg btn-primary" type="submit" name="Submit" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#admclick").click(function() {
+                $("#admclass").slideToggle("slow");
+            });
+            $("#almclick").click(function() {
+                $("#almclass").slideToggle("slow");
+            });
+            $("#fcclick").click(function() {
+                $("#fcclass").slideToggle("slow");
+            });
+            $("#fbclick").click(function() {
+                $("#fbclass").slideToggle("slow");
+            });
+            $("#faclick").click(function() {
+                $("#faclass").slideToggle("slow");
+            });
+            $("#hrclick").click(function() {
+                $("#hrclass").slideToggle("slow");
+            });
+            $("#itclick").click(function() {
+                $("#itclass").slideToggle("slow");
+            });
+            $("#regclick").click(function() {
+                $("#regclass").slideToggle("slow");
+            });
+            $("#saclick").click(function() {
+                $("#saclass").slideToggle("slow");
+            });
+        });
+    </script>
+{{end}}

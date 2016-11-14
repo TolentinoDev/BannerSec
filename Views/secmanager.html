@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+
+{{block center}}
+<h1>
+     You belong to the following groups.
+</h1>
+    {{=groupie.upper()}}
+        <div class="container-fluid">
+        <h1 class="page-header">Manage Requests for {{=message}}</h1>
+            <p>
+                <table class = 'table'>
+                    <tr>
+                        {{try:}}
+                            <td>{{=grid}}</td>
+                        {{except:}}
+                        {{pass}}
+                    </tr>
+                {{pass}}
+            </p>
+    </div>
+{{end}}

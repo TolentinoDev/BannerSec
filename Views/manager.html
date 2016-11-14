@@ -1,0 +1,87 @@
+{{extend 'layout.html'}}
+
+{{block center}}
+    <div class="container">
+        <h1 class="page-header">Banner Account Request Form</h1>
+        <p>Please approve/disapprove the following Banner Account Request...</p>
+        <table class="table">
+            <tr>
+                <td><strong>Request Type</strong></td>
+                <td>{{=row.requesttype}}</td>
+            </tr>
+            <tr>
+                <td><strong>First</strong></td>
+                <td>{{=row.first}}</td>
+            </tr>
+            <tr>
+                <td><strong>Middle</strong></td>
+                <td>{{=row.middle}}</td>
+            </tr>
+            <tr>
+                <td><strong>Last</strong></td>
+                <td>{{=row.last}}</td>
+            </tr>
+            <tr>
+                <td><strong>Department</strong></td>
+                <td>{{=row.dept}}</td>
+            </tr>
+            <tr>
+                <td><strong>Banner ID</strong></td>
+                <td>{{=row.banner}}</td>
+            </tr>
+            <tr>
+                <td><strong>Phone</strong></td>
+                <td>{{=row.phone}}</td>
+            </tr>
+            <tr>
+                <td><strong>Username</strong></td>
+                <td>{{=row.banneruser}}</td>
+            </tr>
+            <tr>
+                <td><strong>Security Class</strong></td>
+                <td>{{=row.securityclass}}</td>
+            </tr>
+            <tr>
+                <td><strong>Effective Date</strong></td>
+                <td>{{=row.effectivedate}}</td>
+            </tr>
+            <tr>
+                <td><strong>Manager</strong></td>
+                <td>{{=row.manageruser}}</td>
+            </tr>
+            <tr>
+                <td><strong>Requested By</strong></td>
+                <td>{{=row.requestedby}}</td>
+            </tr>
+            <tr>
+                <td><strong>Request Date</strong></td>
+                <td>{{=row.requestdate}}</td>
+            </tr>
+        </table>
+        <form class="form-horizontal" method="POST" action="{{=URL('default', 'processmanager', args=[request.args[0], row.id])}}">
+            <div class="form-group">
+                <div class="form-group">
+                        <label class="control-label col-md-3">Comments (optional)</label>
+                        <div class="col-md-9">
+                            <input type="text" name="comments" class="form-control">
+                        </div>
+                    </div>
+                <div class="col-md-12 text-center">
+                    <input type="hidden" name="decision" value="" />
+                    <input class="btn btn-lg btn-success" type="submit" name="approve" value="Approve">
+                    <input class="btn btn-lg btn-danger" type="submit" name="deny" value="Deny">
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("input[name='approve']").click(function() {
+                $("input[name='decision']").val("approve");
+            });
+            $("input[name='deny']").click(function() {
+                $("input[name='decision']").val("deny");
+            });
+        });
+    </script>
+{{end}}
