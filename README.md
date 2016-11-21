@@ -23,3 +23,5 @@ The user first starts by filling out a form that request certain security classe
 ![alt tag](https://github.com/RT-Design/BannerSec/blob/master/Pictures/Secmanager.png)
 
 ![alt tag](https://github.com/RT-Design/BannerSec/blob/master/Pictures/SecManageredit.png)
+
+![alt tag](https://github.com/RT-Design/BannerSec/blob/master/Pictures/Email.png)
