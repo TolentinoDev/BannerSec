@@ -2,6 +2,7 @@
 This web application was built for Fayetteville State University using Web2py. This appliaction was developed to replace the current Banner Sec that Fayetteville State University uses. 
 
 # What was used
+
 -Python 
 -Html
 -CSS
@@ -24,4 +25,4 @@ The user first starts by filling out a form that request certain security classe
 
 ![alt tag](https://github.com/RT-Design/BannerSec/blob/master/Pictures/SecManageredit.png)
 
-![alt tag](https://github.com/RT-Design/BannerSec/blob/master/Pictures/email.png)
+![alt tag](https://github.com/RT-Design/BannerSec/blob/master/Pictures/Email.png)
